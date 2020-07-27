@@ -2,17 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom'
 // import * as serviceWorker from './serviceWorker';
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux'
 import rootReducer from './reducers/rootReducer'
 
-let store = createStore(rootReducer)
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSEION__ && window.__REDUX_DEVTOOLS_EXTENSEION__())
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <Route exact path="/" component={App} />
+    </Router>
   </Provider>,
   document.getElementById('root')
 );
