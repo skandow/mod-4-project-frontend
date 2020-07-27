@@ -1,1 +1,5 @@
-export default function notesReducer() 
+export default function notesReducer(
+    state = [],
+    action) {
+        return state
+    }

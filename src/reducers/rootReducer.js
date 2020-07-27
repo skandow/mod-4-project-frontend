@@ -2,7 +2,9 @@ import notesReducer from './notesReducer'
 import usersReducer from './usersReducer'
 import { combineReducers } from 'redux'
 
-export default rootReducer = combineReducers({
+const rootReducer = combineReducers({
     users: usersReducer,
     notes: notesReducer
 })
+
+export default rootReducer
