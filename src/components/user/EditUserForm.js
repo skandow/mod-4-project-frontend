@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { editUser } from '../../actions/user'
+import { editUser, deleteUser } from '../../actions/user'
 
 const API = "http://localhost:3001/api/v1/users/"
 
@@ -41,11 +41,32 @@ class EditUserForm extends Component {
         })
     }
 
+    deleteUser = () => {
+        const URL = API + this.props.user.id 
+        const token = localStorage.getItem("token")
+        this.setState({
+            redirect: "/"
+        })
+        const reqObj = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        }
+        fetch(URL, reqObj)
+        .then(resp => resp.json())
+        .then(data => {
+            this.props.deleteUser()
+        })
+    }
+
     render() {
-        // if (this.state.redirect) {
-        //     return <Redirect to={this.state.redirect} />
-        // }
+        if (this.state.redirect) {
+            return <Redirect to={this.state.redirect} />
+        }
         return(
+        <div>
             <form onSubmit={this.handleSubmit}>
                 <label>Email address:</label>
                 <input type='text' name="email" value={this.state.email} onChange={this.handleChange}/>
@@ -55,12 +76,15 @@ class EditUserForm extends Component {
                 <input type='text' name="image_url" value={this.state.image_url} onChange={this.handleChange} />
                 <input type="submit" />
             </form>
+            <button onClick={this.deleteUser}>Delete This Profile</button>
+        </div>
         )
     }
 }
 
 const mapDispatchToProps = {
-    editUser
+    editUser,
+    deleteUser
 }
 
 export default connect(null, mapDispatchToProps)(EditUserForm)
