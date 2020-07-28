@@ -30,25 +30,36 @@ class Login extends Component {
         }
         this.setState({
             username: '',
-            password: '',
-            redirect: '/profile'
+            password: ''
         })
         const reqObj = {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(payload)
         }
         
         fetch(API, reqObj)
-        .then(resp => resp.json())
+        .then((resp) => {
+            if(resp.status === 401) {
+                throw Error("The username or password is incorrect")
+            } else {
+                this.setState({
+                    redirect: '/profile'
+                })
+                return resp.json()
+            }
+            })
         .then(data => {
             localStorage.setItem("token", data.jwt)
             this.props.addUser(data.user.data.attributes)
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            this.setState({
+                errorMessage: error.message
+            })
+        })
     }
     
     render() {
@@ -59,7 +70,7 @@ class Login extends Component {
             <form onSubmit={this.handleSubmit} className="log-in">
                 <h1>Please Log In:</h1>
                 {this.state.errorMessage ? 
-                <p>The username or password is incorrect</p>
+                <p style={{color: "red"}}>The username or password is incorrect</p>
                 :
                 null}
                 <input onChange={this.handleChange} type="text" name="username" value={this.state.username} placeholder="username" /><br></br>

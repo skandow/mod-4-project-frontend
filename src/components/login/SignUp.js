@@ -25,6 +25,17 @@ class SignUp extends Component {
             [event.target.name]: event.target.value
         })
     }
+
+    componentWillUnmount() {
+        this.setState({
+            username: '',
+            password: '',
+            email: '',
+            age: '',
+            gender: '',
+            image_url: ''
+        })
+    }
     
     handleSubmit = event => {
         event.preventDefault()
@@ -38,31 +49,34 @@ class SignUp extends Component {
             gender: this.state.gender,
             image_url: this.state.image_url
         }}
-        this.setState({
-            username: '',
-            password: '',
-            email: '',
-            age: '',
-            gender: '',
-            image_url: '',
-            redirect: '/profile'
-        })
         const reqObj = {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(payload)
         }
         
         fetch(API, reqObj)
-        .then(resp => resp.json())
+        .then((resp) => {
+            if(resp.status === 406) {
+                throw Error("Usernames must be unique")
+            } else {
+                this.setState({
+                    redirect: '/profile'
+                })
+                return resp.json()
+            }
+            })
         .then(data => {
             localStorage.setItem("token", data.jwt)
             this.props.addUser(data.user.data.attributes)
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            this.setState({
+                errorMessage: error.message
+            })
+        })
     } else this.setState({
         errorMessage: "You must be 18 or older to use this site."
     })} else this.setState({
