@@ -1,15 +1,17 @@
 export default function usersReducer(
     state = [],
     action) {
+        let array
         switch (action.type) {
             case "ADD_USER":
-            console.log(action.user)
-            return [...state, action.user];
+                return [...state, action.user];
             case "EDIT_USER":
-            const array = []
-            array.push(action.user)
-            console.log(array)
-            return array
+                array = []
+                array.push(action.user)
+                return array
+            case "DELETE_USER":
+                array = [] 
+                return array 
         default:
             return state
     }

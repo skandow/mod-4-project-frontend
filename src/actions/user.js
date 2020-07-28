@@ -11,3 +11,9 @@ export const editUser = user => {
         user
     }
 }
+
+export const deleteUser = () => {
+    return {
+        type: "DELETE_USER"
+    }
+}
