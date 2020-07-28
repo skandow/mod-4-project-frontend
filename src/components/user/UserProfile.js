@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import EditUserForm from './EditUserForm'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import NotesContainer from '../../containers/NotesContainer'
 
 class UserProfile extends Component {
     state = {
@@ -29,6 +30,7 @@ class UserProfile extends Component {
                 <EditUserForm user={this.props.user} renderForm={this.renderForm}/>
                 :
                 null}
+                <NotesContainer notes={this.props.user.notes} />
             </div>
         )
     }
