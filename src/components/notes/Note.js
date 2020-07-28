@@ -35,10 +35,14 @@ class Note extends Component {
     }
 
     render() {
+        console.log(this.props.note)
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
+        const date = new Date(this.props.note.created_at).toLocaleDateString("en-US", options)
+        console.log(date)
         return(
             <div>
                 <h2>{this.props.note.title}</h2>
-                <p>{this.props.note.content}</p>
+                <p>Date Written: {date}</p>
                 <button onClick={this.toggleForm}>Edit this note</button>
                 {this.state.showEditForm ? 
                 <EditNoteForm note={this.props.note} toggleForm={this.toggleForm} />

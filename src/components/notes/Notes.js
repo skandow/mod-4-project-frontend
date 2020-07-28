@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
-import NewNoteForm from './NewNoteForm'
 import Note from './Note'
 
 class Notes extends Component {
@@ -14,7 +12,6 @@ class Notes extends Component {
     render() {
         return(
             <div>
-                <NewNoteForm />
                 {this.renderNotes()}
             </div>
         )
