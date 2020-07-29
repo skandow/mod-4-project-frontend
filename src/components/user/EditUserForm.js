@@ -37,7 +37,6 @@ class EditUserForm extends Component {
         .then(resp => resp.json())
         .then(data => {
             this.props.editUser(data.data.attributes);
-            this.props.renderForm()
         })
     }
 
