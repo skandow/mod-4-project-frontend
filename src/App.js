@@ -11,12 +11,39 @@ import EditUserForm from './components/user/EditUserForm'
 import NotesContainer from './containers/NotesContainer'
 import UserNavBar from './components/user/UserNavBar';
 import NewNoteForm from './components/notes/NewNoteForm'
+import NotePage from './components/notes/NotePage'
+import EditNoteForm from './components/notes/EditNoteForm'
+import { loadNotes } from './actions/notes'
 import {connect} from 'react-redux'
 
 // import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  state = {
+    notesLoaded: false
+  }
+
+  renderNoteRoutes = () => {
+    return this.props.notes.map(note => {
+      return <Route key={note.id} exact path={`/notes/${note.id}`} render={() => <NotePage note={note} />} />
+    })
+  }
+
+  renderNoteEditRoutes = () => {
+    return this.props.notes.map(note => {
+      return <Route key={note.id} exact path={`/notes/${note.id}/edit`} render={() => <EditNoteForm note={note} />} />
+    })
+  }
+
+  componentDidMount() {
+    if (this.props.user) {
+    this.props.loadNotes(this.props.user.notes)
+    this.setState({
+      notesLoaded: true
+    })
+    }
+  }
 
   render() {
   return (
@@ -30,6 +57,8 @@ class App extends Component {
         <Route exact path="/notes" render={() => <NotesContainer notes={this.props.user.notes} />} />
         <Route exact path="/profile/edit" render={() => <EditUserForm user={this.props.user} />} />
         <Route exact path="/notes/new" component={NewNoteForm} />
+        {this.renderNoteRoutes()}
+        {this.renderNoteEditRoutes()}
         </div>
       </Router>
       :
@@ -44,7 +73,11 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  return {user: state.user}
+  return {user: state.user, notes: state.notes}
 }
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = {
+  loadNotes
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

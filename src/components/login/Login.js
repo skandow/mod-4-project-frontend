@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { addUser } from '../../actions/user'
+import { loadNotes } from '../../actions/notes'
 
 const API = "http://localhost:3001/api/v1/login"
 
@@ -54,6 +55,7 @@ class Login extends Component {
         .then(data => {
             localStorage.setItem("token", data.jwt)
             this.props.addUser(data.user.data.attributes)
+            this.props.loadNotes(data.user.data.attributes.notes)
         })
         .catch(error => {
             this.setState({
@@ -82,7 +84,8 @@ class Login extends Component {
 }
 
 const mapDispatchToProps = {
-    addUser
+    addUser,
+    loadNotes
 }
   
 export default connect(null, mapDispatchToProps)(Login)

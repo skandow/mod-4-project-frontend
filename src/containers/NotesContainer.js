@@ -6,7 +6,6 @@ import Notes from '../components/notes/Notes'
 
 class NotesContainer extends Component {
     render() {
-        this.props.loadNotes(this.props.notes)
         return (
             <div className="notes-container">
                 <Notes />
@@ -15,8 +14,8 @@ class NotesContainer extends Component {
     }
 }
 
-const mapDispatchToProps = {
-    loadNotes
-}
+// const mapDispatchToProps = {
+//     loadNotes
+// }
 
-export default connect(null, mapDispatchToProps)(NotesContainer)
+export default NotesContainer

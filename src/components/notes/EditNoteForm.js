@@ -8,7 +8,8 @@ const API = "http://localhost:3001/notes/"
 class EditNoteForm extends Component {
     state = {
         title: this.props.note.title,
-        content: this.props.note.content
+        content: this.props.note.content,
+        redirect: null
     }
 
     handleChange = event => {
@@ -21,26 +22,32 @@ class EditNoteForm extends Component {
         event.preventDefault();
         const URL = API + this.props.note.id 
         const token = localStorage.getItem("token")
+        const payload = {
+            title: this.state.title,
+            content: this.state.content,
+        }
+        this.setState({
+            redirect: "/notes"
+        })
         const reqObj = {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
             },
-            body: JSON.stringify(this.state)
+            body: JSON.stringify(payload)
         }
         fetch(URL, reqObj)
         .then(resp => resp.json())
         .then(data => {
             this.props.editNote(data.data.attributes);
-            this.props.toggleForm()
         })
     }
 
     render() {
-        // if (this.state.redirect) {
-        //     return <Redirect to={this.state.redirect} />
-        // }
+        if (this.state.redirect) {
+            return <Redirect to={this.state.redirect} />
+        }
         return(
         <div>
             <form onSubmit={this.handleSubmit}>
