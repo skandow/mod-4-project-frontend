@@ -66,16 +66,22 @@ class EditUserForm extends Component {
         }
         return(
         <div>
-            <form onSubmit={this.handleSubmit}>
-                <label>Email address:</label>
-                <input type='text' name="email" value={this.state.email} onChange={this.handleChange}/>
-                <label>Gender:</label>
-                <input type='text' name="gender" value={this.state.gender} onChange={this.handleChange} />
-                <label>Image Source:</label>
-                <input type='text' name="image_url" value={this.state.image_url} onChange={this.handleChange} />
-                <input type="submit" />
+            <form className="ui form" id="edit-user" onSubmit={this.handleSubmit}>
+                <div className="field">
+                    <label>Email address:</label>
+                    <input type='text' name="email" value={this.state.email} onChange={this.handleChange}/>
+                </div>
+                <div className="field">
+                    <label>Gender:</label>
+                    <input type='text' name="gender" value={this.state.gender} onChange={this.handleChange} />
+                </div>
+                <div className="field">
+                    <label>Image Source:</label>
+                    <input type='text' name="image_url" value={this.state.image_url} onChange={this.handleChange} />
+                </div>
+                <button type="submit" className="ui button">Edit My Profile</button>
             </form>
-            <button onClick={this.deleteUser}>Delete This Profile</button>
+            <button className="ui button" onClick={this.deleteUser}>Delete This Profile</button>
         </div>
         )
     }

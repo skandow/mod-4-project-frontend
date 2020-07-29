@@ -49,9 +49,10 @@ class App extends Component {
   return (
     <Router>
     <div className="App">
-      {this.props.user ?
-      <Router>
+    {/* <header className="App-header"><h1 className="App-name">Flatnote</h1></header> */}
       <div>
+      {this.props.user ?
+        <div>
         <UserNavBar />
         <Route exact path="/profile" component={UserProfile} />
         <Route exact path="/notes" render={() => <NotesContainer notes={this.props.user.notes} />} />
@@ -60,13 +61,14 @@ class App extends Component {
         {this.renderNoteRoutes()}
         {this.renderNoteEditRoutes()}
         </div>
-      </Router>
       :
-      <div>
+      <div className="App-header">
+        <div><h1 className="App-name">Flatnote</h1></div>
       <LoginContainer />
       <Route exact path="/login" component={Login} />
       <Route exact path="/sign_up" component={SignUp} />
       </div>}
+      </div>
     </div>
     </Router>
   )};

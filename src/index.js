@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import 'semantic-ui-css/semantic.min.css'
 import {
   BrowserRouter as Router,
   Route
@@ -17,7 +18,7 @@ const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && wi
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <Route exact path="/" component={App} />
+      <App />
     </Router>
   </Provider>,
   document.getElementById('root')
