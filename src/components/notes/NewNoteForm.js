@@ -81,7 +81,7 @@ class NewNoteForm extends Component {
 }
 
 const mapStateToProps = state => {
-    return { user: state.users[0] }
+    return { user: state.user }
 }
 
 const mapDispatchToProps = {

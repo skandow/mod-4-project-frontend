@@ -1,22 +1,20 @@
 import React, { Component } from 'react'
-import EditUserForm from './EditUserForm'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
-import NotesContainer from '../../containers/NotesContainer'
 
 class UserProfile extends Component {
     state = {
-        showUserForm: false
+        showProfile: true
     }
 
-    renderForm = () => {
+    renderProfile = () => {
+        console.log("running")
         this.setState({
             showUserForm: !this.state.showUserForm
         })
     }
      
     render() {
-        const {id, username, email, age, gender, image_url } = this.props.user
+        const {username, email, age, gender, image_url } = this.props.user
         return (
             <div className="user-profile">
                 <h1>{username}</h1>
@@ -24,20 +22,13 @@ class UserProfile extends Component {
                 <h2>Email: {email}</h2>
                 <p>Age: {age}</p>
                 <p>Gender: {gender}</p>
-                <p>Id: {id}</p>
-                <button onClick={this.renderForm}>Edit Your Profile</button>
-                {this.state.showUserForm ?
-                <EditUserForm user={this.props.user} renderForm={this.renderForm}/>
-                :
-                null}
-                <NotesContainer notes={this.props.user.notes} />
             </div>
         )
     }
 }
 
 const mapStateToProps = state => {
-    return { user: state.users[0] }
+    return { user: state.user }
 }
 
 export default connect(mapStateToProps)(UserProfile)

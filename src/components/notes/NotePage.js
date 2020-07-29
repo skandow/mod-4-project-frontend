@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { deleteNote } from '../../actions/notes'
 import EditNoteForm from './EditNoteForm'
 
 const API = "http://localhost:3001/notes/"
 
-class Note extends Component {
+class NotePage extends Component {
     state = {
-        showEditForm: false
+        redirect: null,
+        deleted: false
     }
 
     deleteNote = () => {
@@ -21,6 +22,9 @@ class Note extends Component {
                 "Authorization": `Bearer ${token}`
             }
         }
+        this.setState({
+            deleted: true
+        })
         fetch(URL, reqObj)
         .then(resp => resp.json())
         .then(data => {
@@ -28,14 +32,20 @@ class Note extends Component {
         })
     }
 
-    toggleForm = () => {
+    showEditForm = () => {
         this.setState({
-            showEditForm: !this.state.showEditForm
+            redirect: `/notes/${this.props.note.id}/edit`
         })
     }
 
     render() {
-        console.log(this.props)
+        if (this.state.redirect) {
+            return <Redirect to={this.state.redirect} />
+        }
+        if (this.state.deleted) {
+            return <Redirect to="/notes" />
+        }
+        console.log(this.props.note)
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
         const date = new Date(this.props.note.created_at).toLocaleDateString("en-US", options)
         console.log(date)
@@ -43,8 +53,9 @@ class Note extends Component {
             <div>
                 <h2>{this.props.note.title}</h2>
                 <p>Date Written: {date}</p>
-                <button onClick={() => this.props.changeRedirect(`/notes/${this.props.note.id}`)} exact>Read This Note</button>
-                <button onClick={() => this.props.changeRedirect(`/notes/${this.props.note.id}/edit`)} exact>Edit This Note</button>
+                <p>{this.props.note.content}</p>
+                <button onClick={this.showEditForm}>Edit this note</button>
+                <button onClick={this.deleteNote}>Delete this note</button>
             </div>
         )
     }
@@ -54,4 +65,4 @@ const mapDispatchToProps = {
     deleteNote
 }
 
-export default connect(null, mapDispatchToProps)(Note)
+export default connect(null, mapDispatchToProps)(NotePage)
