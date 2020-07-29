@@ -69,15 +69,25 @@ class Login extends Component {
             return <Redirect to={this.state.redirect} />
         }
         return (
-            <form onSubmit={this.handleSubmit} className="log-in">
+            <form onSubmit={this.handleSubmit} className="log-in ui error form">
                 <h1>Please Log In:</h1>
                 {this.state.errorMessage ? 
-                <p style={{color: "red"}}>The username or password is incorrect</p>
+                <div className="ui error message">
+                    <div className="content">
+                        <p>The username or password is incorrect</p>
+                    </div>
+                </div>
                 :
                 null}
-                <input onChange={this.handleChange} type="text" name="username" value={this.state.username} placeholder="username" /><br></br>
-                <input onChange={this.handleChange} type="password" name="password" value={this.state.password} placeholder="password" /><br></br>
-                <input type="submit" />
+                <div className="field">
+                    <label>Username:</label>
+                    <input onChange={this.handleChange} type="text" name="username" value={this.state.username} placeholder="username" />
+                </div>
+                <div className="field">
+                    <label>Password</label>
+                    <input onChange={this.handleChange} type="password" name="password" value={this.state.password} placeholder="password" />
+                </div>
+                <button type="submit" className="ui button">Log In</button>
             </form>
         )
     }

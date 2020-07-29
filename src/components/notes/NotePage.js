@@ -77,13 +77,12 @@ class NotePage extends Component {
         console.log(date)
         return(
             <div>
-                <div onClick={this.star}>{this.state.starred ?
-                filledStar
+                <h2><span style={{cursor:"pointer"}} onClick={this.star}>{this.state.starred ?
+                <span style={{color: "yellow"}}>{filledStar}</span>
                 :
                 emptyStar
                 }
-                </div>
-                <h2>{this.props.note.title}</h2>
+                </span>{this.props.note.title}</h2>
                 <p>Date Written: {date}</p>
                 <p>{this.props.note.content}</p>
                 <button onClick={this.showEditForm}>Edit this note</button>

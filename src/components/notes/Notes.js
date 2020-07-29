@@ -25,7 +25,7 @@ class Notes extends Component {
             return <Redirect to={this.state.redirect} />
         }
         return(
-            <div>
+            <div className = "ui grid container">
                 {this.renderNotes()}
             </div>
         )

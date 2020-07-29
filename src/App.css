@@ -1,5 +1,10 @@
 .App {
   text-align: center;
+  background-color: green
+}
+
+header, footer {
+  background-color: grey
 }
 
 .App-logo {
@@ -13,8 +18,21 @@
   }
 }
 
+.log-in {
+  border: 10px solid red;
+  padding: 20px
+}
+
+#edit-user {
+  border: 10px solid red;
+  padding: 20px;
+  text-align: left;
+  margin: 10px;
+  font-size: 20px
+}
+
 .App-header {
-  background-color: #282c34;
+  background-color: green;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -35,4 +53,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.button {
+  margin: 10px
 }
