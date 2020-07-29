@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { loadNotes} from '../actions/notes'
 import Notes from '../components/notes/Notes'
 
 
@@ -14,8 +12,5 @@ class NotesContainer extends Component {
     }
 }
 
-// const mapDispatchToProps = {
-//     loadNotes
-// }
 
 export default NotesContainer

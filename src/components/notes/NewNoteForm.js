@@ -11,7 +11,6 @@ class NewNoteForm extends Component {
         this.state = {
             title: '',
             content: '',
-            completed: false,
             starred: false,
             errorMessage: '',
             redirect: null
@@ -31,7 +30,6 @@ class NewNoteForm extends Component {
             const payload = { note: {
             title: this.state.title,
             content: this.state.content,
-            completed: this.state.completed,
             starred: this.state.starred,
             user_id: this.props.user.id
         }}
@@ -40,6 +38,7 @@ class NewNoteForm extends Component {
             content: '',
             completed: false,
             starred: false,
+            redirect: '/notes'
         })
         const reqObj = {
             method: "POST",
@@ -62,9 +61,9 @@ class NewNoteForm extends Component {
     }
     
     render() {
-        // if (this.state.redirect) {
-        //     return <Redirect to={this.state.redirect} />
-        // }
+        if (this.state.redirect) {
+            return <Redirect to={this.state.redirect} />
+        }
         return (
             <form onSubmit={this.handleSubmit} className="new-note-form">
                 <h1>Create a New Note:</h1>

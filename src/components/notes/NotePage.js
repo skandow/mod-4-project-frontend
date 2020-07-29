@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { deleteNote } from '../../actions/notes'
-import EditNoteForm from './EditNoteForm'
+import { editNote, deleteNote } from '../../actions/notes'
 
 const API = "http://localhost:3001/notes/"
+const filledStar ="★"
+const emptyStar="☆"
 
 class NotePage extends Component {
     state = {
         redirect: null,
-        deleted: false
+        deleted: false,
+        starred: this.props.note.starred
     }
 
     deleteNote = () => {
@@ -38,6 +40,30 @@ class NotePage extends Component {
         })
     }
 
+    star = () => {
+        const URL = API + this.props.note.id
+        const token = localStorage.getItem("token")
+        const payload = {
+            starred: !this.props.note.starred
+        }
+        this.setState({
+            starred: !this.state.starred
+        })
+        const reqObj = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(payload)
+        }
+        fetch(URL, reqObj)
+        .then(resp => resp.json())
+        .then(data => {
+            this.props.editNote(data.data.attributes);
+        })
+    }
+
     render() {
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />
@@ -51,6 +77,12 @@ class NotePage extends Component {
         console.log(date)
         return(
             <div>
+                <div onClick={this.star}>{this.state.starred ?
+                filledStar
+                :
+                emptyStar
+                }
+                </div>
                 <h2>{this.props.note.title}</h2>
                 <p>Date Written: {date}</p>
                 <p>{this.props.note.content}</p>
@@ -62,7 +94,8 @@ class NotePage extends Component {
 }
 
 const mapDispatchToProps = {
-    deleteNote
+    deleteNote,
+    editNote
 }
 
 export default connect(null, mapDispatchToProps)(NotePage)
