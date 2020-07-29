@@ -71,20 +71,18 @@ class NotePage extends Component {
         if (this.state.deleted) {
             return <Redirect to="/notes" />
         }
-        console.log(this.props.note)
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
         const date = new Date(this.props.note.created_at).toLocaleDateString("en-US", options)
-        console.log(date)
         return(
-            <div>
+            <div className="notecard">
                 <h2><span style={{cursor:"pointer"}} onClick={this.star}>{this.state.starred ?
                 <span style={{color: "yellow"}}>{filledStar}</span>
                 :
                 emptyStar
                 }
                 </span>{this.props.note.title}</h2>
-                <p>Date Written: {date}</p>
-                <p>{this.props.note.content}</p>
+                <p className="date">{date}</p>
+                <p className="note-content">{this.props.note.content}</p>
                 <button onClick={this.showEditForm}>Edit this note</button>
                 <button onClick={this.deleteNote}>Delete this note</button>
             </div>

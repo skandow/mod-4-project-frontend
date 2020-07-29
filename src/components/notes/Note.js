@@ -33,16 +33,14 @@ class Note extends Component {
     }
 
     render() {
-        console.log(this.props)
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
         const date = new Date(this.props.note.created_at).toLocaleDateString("en-US", options)
-        console.log(date)
         return(
             <div>
                 <h2>{this.props.note.starred ? <span style={{color: "yellow"}}>★</span> : null}{this.props.note.title}</h2>
                 <p>Date Written: {date}</p>
-                <button className="ui button" onClick={() => this.props.changeRedirect(`/notes/${this.props.note.id}`)} exact>Read This Note</button>
-                <button className="ui button" onClick={() => this.props.changeRedirect(`/notes/${this.props.note.id}/edit`)} exact>Edit This Note</button>
+                <button className="ui button" onClick={() => this.props.changeRedirect(`/notes/${this.props.note.id}`)}>Read This Note</button>
+                <button className="ui button" onClick={() => this.props.changeRedirect(`/notes/${this.props.note.id}/edit`)}>Edit This Note</button>
             </div>
         )
     }

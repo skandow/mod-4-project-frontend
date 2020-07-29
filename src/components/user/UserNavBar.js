@@ -5,16 +5,21 @@ import { deleteUser } from '../../actions/user'
 
 const UserNavBar = props => {
   const myStyle = {
-    border: "5px solid gray",
-    margin: "50px"
+    border: "5px solid gray"
   }
+
+  const handleLogOut = () => {
+    props.deleteUser();
+    localStorage.removeItem('token')
+  }
+
   return (
-    <div style={myStyle} className="navbar ui menu">
-      <NavLink className="ui item" to="/profile" exact>My Profile</NavLink>
+    <div style={myStyle} className="navbar ui inverted red menu">
+      <NavLink className="ui item" to="/" exact>My Profile</NavLink>
       <NavLink className="ui item" to="/profile/edit" exact>Edit My Profile</NavLink>
       <NavLink className="ui item" to="/notes" exact>My Notes</NavLink>
       <NavLink className="ui item" to="/notes/new" exact>Create a New Note</NavLink>
-      <NavLink className="ui item" to="/" exact onClick={props.deleteUser}>Log Out</NavLink>
+      <NavLink className="ui item" to="/" exact onClick={handleLogOut}>Log Out</NavLink>
     </div>
   );
 };

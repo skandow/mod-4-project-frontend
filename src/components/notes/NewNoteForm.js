@@ -65,16 +65,29 @@ class NewNoteForm extends Component {
             return <Redirect to={this.state.redirect} />
         }
         return (
-            <form onSubmit={this.handleSubmit} className="new-note-form">
-                <h1>Create a New Note:</h1>
+            <div>
+                
+            <form className="ui error form" id="new-note-form" onSubmit={this.handleSubmit}>
+            <h1>Create a New Note:</h1>
                 {this.state.errorMessage ? 
-                <p style={{color: "red"}}>{this.state.errorMessage}</p>
+                <div className="ui error message">
+                    <div className="content">
+                        <p>{this.state.errorMessage}</p>
+                    </div>
+                </div>
                 :
                 null}
-                <input onChange={this.handleChange} type="text" name="title" value={this.state.title} placeholder="title" /><br></br>
-                <input onChange={this.handleChange} type="textarea" name="content" value={this.state.content} placeholder="write your note here" /><br></br>
-                <input type="submit" />
+                <div className="field">
+                    <label>Title:</label>
+                    <input onChange={this.handleChange} type="text" name="title" value={this.state.title} placeholder="title" />
+                </div>
+                <div className="field">
+                    <label>Content:</label>
+                    <textarea onChange={this.handleChange} rows="5" name="content" value={this.state.content} placeholder="write your note here"></textarea>
+                </div>
+                <button className="ui button" type="submit">Submit your new note</button>
             </form>
+            </div>
         )
     }
 }

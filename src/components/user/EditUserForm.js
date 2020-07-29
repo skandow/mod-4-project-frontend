@@ -67,6 +67,7 @@ class EditUserForm extends Component {
         return(
         <div>
             <form className="ui form" id="edit-user" onSubmit={this.handleSubmit}>
+                <h1>Edit Your Profile</h1>
                 <div className="field">
                     <label>Email address:</label>
                     <input type='text' name="email" value={this.state.email} onChange={this.handleChange}/>
