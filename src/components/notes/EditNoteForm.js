@@ -50,12 +50,18 @@ class EditNoteForm extends Component {
         }
         return(
         <div>
-            <form onSubmit={this.handleSubmit}>
-                <label>Title:</label>
-                <input type='text' name="title" value={this.state.title} onChange={this.handleChange}/>
-                <label>Content:</label>
-                <input type='textarea' name="content" value={this.state.content} onChange={this.handleChange} />
-                <input type="submit" />
+            
+            <form className="ui form" id="edit-note" onSubmit={this.handleSubmit}>
+            <h1>Edit Your Note:</h1>
+                <div className="field">
+                    <label>Title:</label>
+                    <input type='text' name="title" value={this.state.title} onChange={this.handleChange}/>
+                </div>
+                <div className="field">
+                    <label>Content:</label>
+                    <textarea name="content" rows="5" value={this.state.content} onChange={this.handleChange}></textarea>
+                </div>
+                <button className="ui button" type="submit">Submit your edit</button>
             </form>
         </div>
         )

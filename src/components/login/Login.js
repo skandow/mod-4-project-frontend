@@ -47,7 +47,7 @@ class Login extends Component {
                 throw Error("The username or password is incorrect")
             } else {
                 this.setState({
-                    redirect: '/profile'
+                    redirect: '/'
                 })
                 return resp.json()
             }

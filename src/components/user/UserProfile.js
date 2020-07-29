@@ -2,16 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class UserProfile extends Component {
-    state = {
-        showProfile: true
-    }
 
-    renderProfile = () => {
-        console.log("running")
-        this.setState({
-            showUserForm: !this.state.showUserForm
-        })
-    }
      
     render() {
         const {username, email, age, gender, image_url } = this.props.user

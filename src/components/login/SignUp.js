@@ -63,7 +63,7 @@ class SignUp extends Component {
                 throw Error("Usernames must be unique")
             } else {
                 this.setState({
-                    redirect: '/profile'
+                    redirect: '/'
                 })
                 return resp.json()
             }
@@ -89,23 +89,46 @@ class SignUp extends Component {
             return <Redirect to={this.state.redirect} />
         }
         return (
-            <form onSubmit={this.handleSubmit} className="log-in">
+            <form id="sign-up" className="ui error form" onSubmit={this.handleSubmit}>
                 <h1>Enter Your Information To Create Your Account:</h1>
                 {this.state.errorMessage ? 
-                <p style={{color: "red"}}>{this.state.errorMessage}</p>
+                <div className="ui error message">
+                    <div className="content">
+                        <p>{this.state.errorMessage}</p>
+                    </div>
+                </div>
                 :
                 null}
-                <input onChange={this.handleChange} type="text" name="username" value={this.state.username} placeholder="username" /><br></br>
-                <input onChange={this.handleChange} type="password" name="password" value={this.state.password} placeholder="password" /><br></br>
-                <input onChange={this.handleChange} type="text" name="email" value={this.state.email} placeholder="email" /><br></br>
-                <input onChange={this.handleChange} type="text" name="age" value={this.state.age} placeholder="age" /><br></br>
-                <input onChange={this.handleChange} type="text" name="gender" value={this.state.gender} placeholder="gender" /><br></br>
-                <input onChange={this.handleChange} type="text" name="image_url" value={this.state.image_url} placeholder="image_url" /><br></br>
-                <input type="submit" />
+                <div className="field">
+                    <label>Username:</label>
+                    <input onChange={this.handleChange} type="text" name="username" value={this.state.username} placeholder="username" />
+                </div>
+                <div className="field">
+                    <label>Password:</label>
+                    <input onChange={this.handleChange} type="password" name="password" value={this.state.password} placeholder="password" />
+                </div>
+                <div className="field">
+                    <label>Email address:</label>
+                    <input onChange={this.handleChange} type="text" name="email" value={this.state.email} placeholder="email" />
+                </div> 
+                <div className="field">
+                    <label>Age:</label>
+                    <input onChange={this.handleChange} type="text" name="age" value={this.state.age} placeholder="age" />
+                </div>
+                <div className="field">
+                    <label>Gender:</label>
+                    <input onChange={this.handleChange} type="text" name="gender" value={this.state.gender} placeholder="gender" />
+                </div>
+                <div className="field">
+                    <label>Avatar_url:</label>
+                    <input onChange={this.handleChange} type="text" name="image_url" value={this.state.image_url} placeholder="image_url" />
+                </div>
+                <button type="submit" className="ui button">Submit</button>
             </form>
         )
     }
 }
+
 const mapDispatchToProps = {
     addUser
 }
