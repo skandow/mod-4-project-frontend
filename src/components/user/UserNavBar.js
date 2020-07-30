@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { deleteUser } from '../../actions/user'
+import { clearNotes } from '../../actions/notes'
 
 const UserNavBar = props => {
   const myStyle = {
@@ -10,6 +11,7 @@ const UserNavBar = props => {
 
   const handleLogOut = () => {
     props.deleteUser();
+    props.clearNotes();
     localStorage.removeItem('token')
   }
 
@@ -25,7 +27,8 @@ const UserNavBar = props => {
 };
 
 const mapDispatchToProps = {
-    deleteUser
+    deleteUser,
+    clearNotes
 }
 
 export default connect(null, mapDispatchToProps)(UserNavBar)

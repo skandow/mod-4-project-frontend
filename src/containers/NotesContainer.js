@@ -12,15 +12,23 @@ class NotesContainer extends Component {
 
     renderFilters = () => {
         let notes = [...this.props.notes]
-        // console.log("notes pre filter", notes)
+        let sortedNotes
         if (this.state.starFilter) {
             notes = notes.filter(note => note.starred === true)
         }
         if (this.state.recentFirst) {
-            notes = notes.reverse()
-        }
-        // console.log("notes post-filter", notes)
-        return notes
+            sortedNotes = notes.slice().sort((a, b) => {
+                const dateA = new Date(a.created_at)
+                const dateB = new Date(b.created_at)
+                return dateB - dateA
+            }) 
+        } else {
+            sortedNotes = notes.slice().sort((a, b) => {
+                const dateA = new Date(a.created_at)
+                const dateB = new Date(b.created_at)
+                return dateA - dateB
+        })}
+        return sortedNotes
     } 
 
     handleFilters = event => {
@@ -36,12 +44,20 @@ class NotesContainer extends Component {
     }
 
     render() {
-        // console.log(this.state)
         const notes = this.renderFilters()
+        let message 
+        if (this.props.notes.length === 0) {
+            message = "You haven't written any notes yet!"
+        } else {
+            message = ''
+        }
         return (
             <div className="notes-container App-body">
                 <NotesNavBar starsOnly={this.state.starFilter} recentFirst={this.state.recentFirst} handleFilters={this.handleFilters}/>
                 <h1>My Notes:</h1>
+                <h2 style={{color: "darkred"}}>
+                    {message}
+                </h2>
                 <Notes notes={notes}/>
             </div>
         )
