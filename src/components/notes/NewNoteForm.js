@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom'
 import { addNote } from '../../actions/notes'
 
 const API = "http://localhost:3001/notes"
+const filledStar ="★"
+const emptyStar="☆"
 
 class NewNoteForm extends Component {
     constructor() {
@@ -22,6 +24,12 @@ class NewNoteForm extends Component {
             [event.target.name]: event.target.value
         })
     }
+
+    handleStarred = () => {
+        this.setState({
+            starred: !this.state.starred
+        })
+    }
     
     handleSubmit = event => {
         event.preventDefault()
@@ -36,7 +44,6 @@ class NewNoteForm extends Component {
         this.setState({
             title: '',
             content: '',
-            completed: false,
             starred: false,
             redirect: '/notes'
         })
@@ -77,6 +84,14 @@ class NewNoteForm extends Component {
                 </div>
                 :
                 null}
+                <span style={{cursor:"pointer"}} onClick={this.handleStarred}>Star This Note: {this.state.starred ?
+                <span style={{color: "yellow"}}>{filledStar}</span>
+                :
+                emptyStar
+                }
+                </span>
+                <br></br>
+                <br></br>
                 <div className="field">
                     <label>Title:</label>
                     <input onChange={this.handleChange} type="text" name="title" value={this.state.title} placeholder="title" />
