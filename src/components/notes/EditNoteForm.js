@@ -4,17 +4,26 @@ import { Redirect } from 'react-router-dom'
 import { editNote } from '../../actions/notes'
 
 const API = "http://localhost:3001/notes/"
+const filledStar ="★"
+const emptyStar="☆"
 
 class EditNoteForm extends Component {
     state = {
         title: this.props.note.title,
         content: this.props.note.content,
+        starred: this.props.note.starred,
         redirect: null
     }
 
     handleChange = event => {
         this.setState({
             [event.target.name]: event.target.value
+        })
+    }
+
+    handleStarred = () => {
+        this.setState({
+            starred: !this.state.starred
         })
     }
 
@@ -25,6 +34,7 @@ class EditNoteForm extends Component {
         const payload = {
             title: this.state.title,
             content: this.state.content,
+            starred: this.state.starred
         }
         this.setState({
             redirect: "/notes"
@@ -53,6 +63,17 @@ class EditNoteForm extends Component {
             
             <form className="ui form" id="edit-note" onSubmit={this.handleSubmit}>
             <h1>Edit Your Note:</h1>
+            <p></p>
+            <span > <span style={{cursor:"pointer"}} onClick={this.handleStarred}>{this.state.starred ?
+                <span style={{color: "yellow"}}>{filledStar}</span>
+                :
+                emptyStar
+                }
+                </span>
+                <div style={{padding: "0px", display: "inline"}}>{this.state.starred ? " Unstar this Note:" : " Star this Note:"}</div>
+                </span>
+                <br></br>
+                <br></br>
                 <div className="field">
                     <label>Title:</label>
                     <input type='text' name="title" value={this.state.title} onChange={this.handleChange}/>
