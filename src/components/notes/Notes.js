@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import NoteContainer from '../../containers/NoteContainer'
 
@@ -32,8 +31,8 @@ class Notes extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return { notes: state.notes }
-}
+// const mapStateToProps = state => {
+//     return { notes: state.notes }
+// }
 
-export default connect(mapStateToProps)(Notes)
+export default Notes
