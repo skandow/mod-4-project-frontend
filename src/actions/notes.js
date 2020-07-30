@@ -25,3 +25,9 @@ export const deleteNote = id => {
         id
     }
 }
+
+export const clearNotes = () => {
+    return {
+        type: "CLEAR_NOTES"
+    }
+}

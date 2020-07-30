@@ -16,6 +16,9 @@ export default function notesReducer(
                 })
             case "DELETE_NOTE": 
                 return state.filter(note => note.id !== action.id)
+            case "CLEAR_NOTES":
+                let array = []
+                return array
         default:
             return state
     }
