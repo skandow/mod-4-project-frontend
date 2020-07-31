@@ -16,7 +16,7 @@ class NotesContainer extends Component {
         let notes = [...this.props.notes]
         let sortedNotes
         if (this.state.starFilter) {
-            let notes = notes.filter(note => note.starred === true)
+            notes = notes.filter(note => note.starred === true)
         }
         if (this.state.recentFirst) {
             sortedNotes = notes.slice().sort((a, b) => {
