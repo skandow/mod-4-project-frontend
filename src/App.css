@@ -1,16 +1,17 @@
 body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh
+  min-height: 100vh;
 }
 
 .App {
   text-align: center;
-  background-color: green;
-  min-height: 100vh
+  color: white;
+background: linear-gradient(90deg, rgba(3,36,0,0.8953956582633054) 0%, rgba(12,121,9,0.9066001400560224) 69%, rgba(0,255,70,0.8953956582633054) 100%);
+  min-height: 87vh
 }
 
-header, footer {
+header {
   background-color: grey
 }
 
@@ -25,29 +26,56 @@ header, footer {
   }
 }
 
-.log-in {
-  border: 10px solid red;
-  padding: 20px
+.log-in, .login-container {
+  border: 5px solid red;
+background: linear-gradient(90deg, rgba(12,3,36,1) 0%, rgba(9,18,121,1) 69%, rgba(0,243,255,1) 100%);
+  padding: 20px;
+  color: white;
+  width: 400px;
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 #edit-user, #edit-note, #new-note-form, #sign-up {
-  border: 10px solid red;
+  border: 5px solid red;
+  background: rgb(12,3,36);
+background: linear-gradient(90deg, rgba(12,3,36,1) 0%, rgba(9,18,121,1) 69%, rgba(0,243,255,1) 100%);
   padding: 20px;
   text-align: left;
-  margin: 10px;
+  margin: auto;
   font-size: 20px;
   flex: 1
 }
 
-.App-header {
-  background-color: green;
-  min-height: 50px;
+#sign-up label, #edit-user label, #new-note-form label, #edit-note label {
+  color: white;
+}
+
+#sign-up, #edit-user, #new-note-form, #edit-note {
+  width: 80%;
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px
+}
+
+.App-header, .App-footer {
+  background: linear-gradient(90deg, rgba(3,36,0,0.8953956582633054) 0%, rgba(12,121,9,0.9066001400560224) 69%, rgba(0,255,70,0.8953956582633054) 100%);
+  height: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 30px !important;
   color: white;
+}
+
+.App-footer {
+  border-top: 5px solid gray;
+}
+
+.App-header {
+  border-bottom: 5px solid gray
 }
 
 .App-body {
@@ -75,14 +103,21 @@ header, footer {
   margin-top: 0px !important;
   margin-left: 0px !important;
   margin-right: 0px !important;
-  margin-bottom: 50px !important;
+  margin-bottom: 0px !important;
+  border-radius: 0 !important
 }
 
 .notecard {
   align-items: center;
-  background-color: white;
-  border: 20px solid red;
-  padding: 20px
+  background: rgb(143,140,140);
+background: radial-gradient(circle, rgba(143,140,140,1) 0%, rgba(194,189,194,1) 58%, rgba(239,238,240,0.9682247899159664) 100%);
+  color: white;
+  border: 5px solid red;
+  width: 80%;
+  padding: 20px;
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .note-content {
@@ -91,9 +126,25 @@ header, footer {
   border: 5px solid green;
   text-align: left;
   margin-top: 10px;
+  padding: 5px;
   margin-bottom: 10px
 }
 
 .date {
   margin-bottom: 20px
+}
+
+.user-profile {
+  margin: auto !important;
+  margin-top: 5px !important;
+  margin-bottom: 5px !important
+}
+
+.delete {
+  position: absolute;
+  right: 18px
+}
+
+.notes-container {
+  margin-bottom: 20px;
 }

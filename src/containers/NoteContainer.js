@@ -7,7 +7,7 @@ class NoteContainer extends Component {
     
     render() {
         const myStyle = {
-            border: '10px solid white',
+            border: '2px solid white',
             padding: '10px',
             color: 'white',
             backgroundColor: "gray"}
