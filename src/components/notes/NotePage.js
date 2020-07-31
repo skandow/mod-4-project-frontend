@@ -82,9 +82,9 @@ class NotePage extends Component {
                 }
                 </span>{this.props.note.title}</h2>
                 <p className="date">{date}</p>
-                <p className="note-content">{this.props.note.content}</p>
-                <button onClick={this.showEditForm}>Edit this note</button>
-                <button onClick={this.deleteNote}>Delete this note</button>
+                <p style={{whiteSpace: 'pre-line' }} className="note-content">{this.props.note.content}</p>
+                <button className="ui button" onClick={this.showEditForm}>Edit this note</button>
+                <button className="ui button" onClick={this.deleteNote}>Delete this note</button>
             </div>
         )
     }

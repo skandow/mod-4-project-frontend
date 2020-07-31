@@ -5,8 +5,8 @@ import UserNavBar from '../components/user/UserNavBar'
 class UserContainer extends Component {
     render() {
         return (
-            <div className="login-container">
-                <div><h1 className="App-header">Flatnote</h1></div>
+            <div className="container">
+                <div><h1 className="App-header">FlatNote</h1></div>
                 <UserNavBar />
             </div>
         ) 

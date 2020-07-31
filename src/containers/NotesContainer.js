@@ -70,7 +70,7 @@ class NotesContainer extends Component {
             <div className="notes-container App-body">
                 <NotesNavBar starsOnly={this.state.starFilter} recentFirst={this.state.recentFirst} onChange={this.onChange} handleFilters={this.handleFilters}/>
                 <h1>My Notes:</h1>
-                <h2 style={{color: "darkred"}}>
+                <h2 style={{color: "red"}}>
                     {message}
                 </h2>
                 <Notes notes={notes}/>

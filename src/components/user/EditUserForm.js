@@ -22,6 +22,14 @@ class EditUserForm extends Component {
         event.preventDefault();
         const URL = API + this.props.user.id 
         const token = localStorage.getItem("token")
+        let email = this.state.email === '' ? this.props.user.email : this.state.email 
+        let gender = this.state.gender === '' ? this.props.user.gender : this.state.gender
+        let image_url = this.state.image_url === '' ? this.props.user.image_url : this.state.image_url
+        const payload = {
+            email: email,
+            gender: gender,
+            image_url: image_url
+        }
         this.setState({
             redirect: '/'
         })
@@ -31,7 +39,7 @@ class EditUserForm extends Component {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
             },
-            body: JSON.stringify(this.state)
+            body: JSON.stringify(payload)
         }
         fetch(URL, reqObj)
         .then(resp => resp.json())
@@ -81,8 +89,9 @@ class EditUserForm extends Component {
                     <input type='text' name="image_url" value={this.state.image_url} onChange={this.handleChange} />
                 </div>
                 <button type="submit" className="ui button">Edit My Profile</button>
+                <button className="ui button delete" onClick={this.deleteUser}>Delete This Profile</button>
             </form>
-            <button className="ui button" onClick={this.deleteUser}>Delete This Profile</button>
+            
         </div>
         )
     }

@@ -6,7 +6,9 @@ import { clearNotes } from '../../actions/notes'
 
 const UserNavBar = props => {
   const myStyle = {
-    border: "5px solid gray"
+    borderBottom: "5px solid gray",
+    borderLeft: "5px solid gray",
+    borderRight: "5px solid gray"
   }
 
   const handleLogOut = () => {

@@ -78,7 +78,7 @@ class App extends Component {
     <div className="App">
       <div>
       {this.props.user ?
-        <div>
+        <div className="App">
         <UserContainer />
         <Route exact path="/" component={UserProfile} />
         <Route exact path="/notes" render={() => <NotesContainer notes={this.props.user.notes} />} />
@@ -89,11 +89,13 @@ class App extends Component {
         </div>
       :
       <div className="App">
-        <div><h1 className="App-header">Flatnote</h1></div>
+        <div className="App-header"><h1>FlatNote</h1>
+        <h2>A place to write, save, and email notes for any and all purposes!</h2></div>
       <LoginContainer />
       <Route exact path="/login" component={Login} />
       <Route exact path="/sign_up" component={SignUp} />
       </div>}
+      <div className="App-footer"><h1>Copywrite 2020</h1></div>
       </div>
     </div>
     </Router>

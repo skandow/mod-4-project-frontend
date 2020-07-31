@@ -29,11 +29,13 @@ class EditNoteForm extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        const URL = API + this.props.note.id 
+        const URL = API + this.props.note.id
+        let title = this.state.title === "" ? this.props.note.title : this.state.title 
+        let content = this.state.content === "" ? this.props.note.content : this.state.content
         const token = localStorage.getItem("token")
         const payload = {
-            title: this.state.title,
-            content: this.state.content,
+            title: title,
+            content: content,
             starred: this.state.starred
         }
         this.setState({

@@ -80,11 +80,11 @@ class Login extends Component {
                 :
                 null}
                 <div className="field">
-                    <label>Username:</label>
+                    <label style={{color: "white"}}>Username:</label>
                     <input onChange={this.handleChange} type="text" name="username" value={this.state.username} placeholder="username" />
                 </div>
                 <div className="field">
-                    <label>Password</label>
+                    <label style={{color: "white"}}>Password</label>
                     <input onChange={this.handleChange} type="password" name="password" value={this.state.password} placeholder="password" />
                 </div>
                 <button type="submit" className="ui button">Log In</button>
