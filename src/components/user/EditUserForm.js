@@ -23,7 +23,7 @@ class EditUserForm extends Component {
         const URL = API + this.props.user.id 
         const token = localStorage.getItem("token")
         this.setState({
-            redirect: '/profile'
+            redirect: '/'
         })
         const reqObj = {
             method: "PATCH",

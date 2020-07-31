@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { addNote } from '../../actions/notes'
+import emailjs from 'emailjs-com'
 
 const API = "http://localhost:3001/notes"
 const filledStar ="★"
@@ -15,7 +16,8 @@ class NewNoteForm extends Component {
             content: '',
             starred: false,
             errorMessage: '',
-            redirect: null
+            redirect: null,
+            email: false
         }
     }
 
@@ -30,6 +32,10 @@ class NewNoteForm extends Component {
             starred: !this.state.starred
         })
     }
+
+    sendEmail = (templateId, variables) => {
+        emailjs.send("default_service", templateId, variables, "user_1GnGr1Ktl736HBQuOWgwF")
+    }
     
     handleSubmit = event => {
         event.preventDefault()
@@ -41,10 +47,21 @@ class NewNoteForm extends Component {
             starred: this.state.starred,
             user_id: this.props.user.id
         }}
+        if (this.state.email) {
+        const templateId = "template_eRb8U9w6"
+        const variables = {
+            message_html: this.state.content,
+            title: this.state.title,
+            name: this.props.user.username,
+            email: this.props.user.email
+        }
+        this.sendEmail(templateId, variables)
+        }
         this.setState({
             title: '',
             content: '',
             starred: false,
+            email: false,
             redirect: '/notes'
         })
         const reqObj = {
@@ -65,6 +82,12 @@ class NewNoteForm extends Component {
     } else this.setState({
         errorMessage: "No fields can be left blank."
     })
+    }
+
+    toggleEmail = () => {
+        this.setState({
+            email: !this.state.email
+        })
     }
     
     render() {
@@ -99,6 +122,12 @@ class NewNoteForm extends Component {
                 <div className="field">
                     <label>Content:</label>
                     <textarea onChange={this.handleChange} rows="5" name="content" value={this.state.content} placeholder="write your note here"></textarea>
+                </div>
+                <div className="ui field">
+                    <div className="ui checkbox">
+                        <input type="checkbox" onChange={this.toggleEmail}/>
+                        <label>Email a copy of this note.</label>
+                    </div>
                 </div>
                 <button className="ui button" type="submit">Submit your new note</button>
             </form>
