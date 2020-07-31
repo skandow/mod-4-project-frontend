@@ -1,68 +1,50 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Welcome to FlatNote!
 
-## Available Scripts
+This SPA is designed to allow individuals to create notes of their choosing. The user will
+be able to create a profile and write notes for any purpose. These notes can be saved, edited,
+and emailed to the address the user has submitted for their profiles. 
 
-In the project directory, you can run:
+Flatnote allows individuals to create accounts providing the following data:
 
-### `yarn start`
+# User Data: 
+  1.  User Name
+  2.  Password
+  3.  Email address
+  4.  Age
+  5.  Gender
+  6.  Avatar image url  
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Menu Highlights:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+FlatNote utilizes a menu NavBar that allows users to accomplish the following:
 
-### `yarn test`
+  1.  View a user's profile
+  2.  Edit a user's profile (the profile can also be deleted on this page)
+  3.  View a user's notes
+        a. Users can see the 'Notes' page, which lists the title and date created for each note.
+        b. Users can filter out notes by title or content and can choose to have only starred 
+           notes displayed or have the display based on most recent note first or oldest note first
+  4.  Create a new note
+        a. Users can create a new note with title and content
+        b. Users have the option to mark the note as important with a star
+        c. Users can also click an option to have the note emailed to them upon saving it to the
+           database
+  5.  A 'log-out' button
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# NotePage Highlights:
 
-### `yarn build`
+When visiting a particular note page, users can acccomplish the following
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  1.  View the note
+  2.  Edit the note
+  3.  Delete the note
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+# Installation:
+  1.  Clone this repo and the corresponding back-end repo
+  2.  In your terminal, go to the 'mod-4-project-backend' directory and run 'bundle install'
+  3.  Run 'rails db:create'
+  4.  Run 'rails db:migrate'
+  5.  Run 'rails db:seed'
+  6.  Run 'rails s -p 3001' to start the back-end server
+  7.  In your terminal, go to the 'mod-4-project-frontend' directory and run 'npm install'
+  8.  Run 'npm start' to start the front-end server
