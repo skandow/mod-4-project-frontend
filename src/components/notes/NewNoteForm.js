@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { addNote } from '../../actions/notes'
 import emailjs from 'emailjs-com'
 
-const API = "http://localhost:3001/notes"
+const API = "https://flatnote-api.herokuapp.com/notes"
 const filledStar ="★"
 const emptyStar="☆"
 

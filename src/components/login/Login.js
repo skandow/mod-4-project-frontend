@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { addUser } from '../../actions/user'
 import { loadNotes } from '../../actions/notes'
 
-const API = "http://localhost:3001/api/v1/login"
+const API = "https://flatnote-api.herokuapp.com/api/v1/login"
 
 class Login extends Component {
     constructor() {

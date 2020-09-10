@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { deleteNote } from '../../actions/notes'
 
-const API = "http://localhost:3001/notes/"
+const API = "https://flatnote-api.herokuapp.com/notes/"
 
 class Note extends Component {
     state = {

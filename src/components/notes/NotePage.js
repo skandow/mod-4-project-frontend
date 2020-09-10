@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { editNote, deleteNote } from '../../actions/notes'
 
-const API = "http://localhost:3001/notes/"
+const API = "https://flatnote-api.herokuapp.com/notes/"
 const filledStar ="★"
 const emptyStar="☆"
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { addUser } from '../../actions/user'
 
-const API = "http://localhost:3001/api/v1/users"
+const API = "https://flatnote-api.herokuapp.com/api/v1/users"
 
 class SignUp extends Component {
     constructor() {
