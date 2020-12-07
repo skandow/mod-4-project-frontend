@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
-import Note from '../components/notes/Note'
+import React, { Component } from 'react';
+import Note from '../components/notes/Note';
 
 
 class NoteContainer extends Component {
-    
     
     render() {
         const myStyle = {
@@ -16,7 +15,7 @@ class NoteContainer extends Component {
                 <Note note={this.props.note} changeRedirect={this.props.changeRedirect}/>
             </div>
         )
-    }
-}
+    };
+};
 
 export default NoteContainer

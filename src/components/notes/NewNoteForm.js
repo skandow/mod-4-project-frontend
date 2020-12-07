@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
-import { addNote } from '../../actions/notes'
-import emailjs from 'emailjs-com'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { addNote } from '../../actions/notes';
+import emailjs from 'emailjs-com';
 
-const API = "https://flatnote-api.herokuapp.com/notes"
-const filledStar ="★"
-const emptyStar="☆"
+const API = "https://flatnote-api.herokuapp.com/notes";
+const filledStar ="★";
+const emptyStar="☆";
 
 class NewNoteForm extends Component {
     constructor() {
@@ -19,86 +19,88 @@ class NewNoteForm extends Component {
             redirect: null,
             email: false
         }
-    }
+    };
 
     handleChange = event => {
         this.setState({
             [event.target.name]: event.target.value
         })
-    }
+    };
 
     handleStarred = () => {
         this.setState({
             starred: !this.state.starred
         })
-    }
+    };
 
     sendEmail = (templateId, variables) => {
         emailjs.send("default_service", templateId, variables, "user_1GnGr1Ktl736HBQuOWgwF")
-    }
+    };
     
     handleSubmit = event => {
-        event.preventDefault()
-        const token = localStorage.getItem("token")
+        event.preventDefault();
+        const token = localStorage.getItem("token");
         if ((this.state.title) && (this.state.content)) {
-            const payload = { note: {
-            title: this.state.title,
-            content: this.state.content,
-            starred: this.state.starred,
-            user_id: this.props.user.id
-        }}
-        if (this.state.email) {
-        const templateId = "template_eRb8U9w6"
-        const variables = {
-            message_html: this.state.content,
-            title: this.state.title,
-            name: this.props.user.username,
-            email: this.props.user.email
+            const payload = { 
+                note: {
+                    title: this.state.title,
+                    content: this.state.content,
+                    starred: this.state.starred,
+                    user_id: this.props.user.id
+                }
+            }
+            if (this.state.email) {
+                const templateId = "template_eRb8U9w6";
+                const variables = {
+                    message_html: this.state.content,
+                    title: this.state.title,
+                    name: this.props.user.username,
+                    email: this.props.user.email
+                }
+                this.sendEmail(templateId, variables)
+            }
+            this.setState({
+                title: '',
+                content: '',
+                starred: false,
+                email: false,
+                redirect: '/notes'
+            })
+            const reqObj = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify(payload)
+            }
+            fetch(API, reqObj)
+            .then(resp => resp.json())
+            .then(data => {
+                this.props.addNote(data.data.attributes)
+            })
+            .catch(error => console.log(error))
+        } else { 
+            this.setState({
+                errorMessage: "No fields can be left blank."
+            })
         }
-        this.sendEmail(templateId, variables)
-        }
-        this.setState({
-            title: '',
-            content: '',
-            starred: false,
-            email: false,
-            redirect: '/notes'
-        })
-        const reqObj = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-            body: JSON.stringify(payload)
-        }
-        
-        fetch(API, reqObj)
-        .then(resp => resp.json())
-        .then(data => {
-            this.props.addNote(data.data.attributes)
-        })
-        .catch(error => console.log(error))
-    } else this.setState({
-        errorMessage: "No fields can be left blank."
-    })
-    }
+    };
 
     toggleEmail = () => {
         this.setState({
             email: !this.state.email
         })
-    }
+    };
     
     render() {
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />
-        }
+        };
         return (
-            <div>
-                
+        <div> 
             <form className="ui error form" id="new-note-form" onSubmit={this.handleSubmit}>
-            <h1>Create a New Note:</h1>
+                <h1>Create a New Note:</h1>
                 {this.state.errorMessage ? 
                 <div className="ui error message">
                     <div className="content">
@@ -107,11 +109,12 @@ class NewNoteForm extends Component {
                 </div>
                 :
                 null}
-                <span style={{cursor:"pointer"}} onClick={this.handleStarred}>Star This Note: {this.state.starred ?
-                <span style={{color: "yellow"}}>{filledStar}</span>
-                :
-                emptyStar
-                }
+                <span style={{cursor:"pointer"}} onClick={this.handleStarred}>Star This Note: {this.state.starred 
+                    ?
+                    <span style={{color: "yellow"}}>{filledStar}</span>
+                    :
+                    emptyStar
+                    }
                 </span>
                 <br></br>
                 <br></br>
@@ -131,17 +134,17 @@ class NewNoteForm extends Component {
                 </div>
                 <button className="ui button" type="submit">Submit your new note</button>
             </form>
-            </div>
+        </div>
         )
     }
 }
 
 const mapStateToProps = state => {
     return { user: state.user }
-}
+};
 
 const mapDispatchToProps = {
     addNote
-}
+};
   
 export default connect(mapStateToProps, mapDispatchToProps)(NewNoteForm)

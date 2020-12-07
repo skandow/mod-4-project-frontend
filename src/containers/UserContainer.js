@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import UserNavBar from '../components/user/UserNavBar'
+import React, {Component} from 'react';
+import UserNavBar from '../components/user/UserNavBar';
 
 
 class UserContainer extends Component {
@@ -10,8 +10,7 @@ class UserContainer extends Component {
                 <UserNavBar />
             </div>
         ) 
-
-    }
-}
+    };
+};
 
 export default UserContainer

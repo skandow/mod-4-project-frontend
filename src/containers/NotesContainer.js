@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import {connect} from 'react-redux' 
-import Notes from '../components/notes/Notes'
-import NotesNavBar from '../components/notes/NotesNavBar'
+import React, { Component } from 'react';
+import {connect} from 'react-redux'; 
+import Notes from '../components/notes/Notes';
+import NotesNavBar from '../components/notes/NotesNavBar';
 
 
 class NotesContainer extends Component {
@@ -10,14 +10,14 @@ class NotesContainer extends Component {
         recentFirst: false,
         title: "",
         content: ""
-    }
+    };
 
     renderFilters = () => {
-        let notes = [...this.props.notes]
-        let sortedNotes
+        let notes = [...this.props.notes];
+        let sortedNotes;
         if (this.state.starFilter) {
             notes = notes.filter(note => note.starred === true)
-        }
+        };
         if (this.state.recentFirst) {
             sortedNotes = notes.slice().sort((a, b) => {
                 const dateA = new Date(a.created_at)
@@ -29,21 +29,22 @@ class NotesContainer extends Component {
                 const dateA = new Date(a.created_at)
                 const dateB = new Date(b.created_at)
                 return dateA - dateB
-        })}
+            })
+        }
         if (this.state.title) {
             sortedNotes = sortedNotes.filter(note => note.title.toLowerCase().includes(this.state.title.toLowerCase()))
-        }
+        };
         if (this.state.content) {
             sortedNotes = sortedNotes.filter(note => note.content.toLowerCase().includes(this.state.content.toLowerCase()))
-        }
+        };
         return sortedNotes
-    } 
+    }; 
 
     onChange = event => {
         this.setState({
             [event.target.name]: event.target.value 
         })
-    }
+    };
 
     handleFilters = event => {
         if (event.target.id === "starred") {
@@ -55,10 +56,9 @@ class NotesContainer extends Component {
                 recentFirst: !this.state.recentFirst
             })
         }
-    }
+    };
 
     render() {
-        console.log(this.state)
         const notes = this.renderFilters()
         let message 
         if (this.props.notes.length === 0) {
@@ -76,10 +76,11 @@ class NotesContainer extends Component {
                 <Notes notes={notes}/>
             </div>
         )
-    }
-}
+    };
+};
+
 const mapStateToProps = state => {
     return { notes: state.notes }
-}
+};
 
 export default connect(mapStateToProps)(NotesContainer)

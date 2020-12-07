@@ -1,11 +1,11 @@
-import React, {Component} from 'react'
-import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
-import { editNote } from '../../actions/notes'
+import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { editNote } from '../../actions/notes';
 
-const API = "https://flatnote-api.herokuapp.com/notes/"
-const filledStar ="★"
-const emptyStar="☆"
+const API = "https://flatnote-api.herokuapp.com/notes/";
+const filledStar ="★";
+const emptyStar="☆";
 
 class EditNoteForm extends Component {
     state = {
@@ -13,26 +13,26 @@ class EditNoteForm extends Component {
         content: this.props.note.content,
         starred: this.props.note.starred,
         redirect: null
-    }
+    };
 
     handleChange = event => {
         this.setState({
             [event.target.name]: event.target.value
         })
-    }
+    };
 
     handleStarred = () => {
         this.setState({
             starred: !this.state.starred
         })
-    }
+    };
 
     handleSubmit = event => {
         event.preventDefault();
-        const URL = API + this.props.note.id
-        let title = this.state.title === "" ? this.props.note.title : this.state.title 
-        let content = this.state.content === "" ? this.props.note.content : this.state.content
-        const token = localStorage.getItem("token")
+        const URL = API + this.props.note.id;
+        let title = this.state.title === "" ? this.props.note.title : this.state.title; 
+        let content = this.state.content === "" ? this.props.note.content : this.state.content;
+        const token = localStorage.getItem("token");
         const payload = {
             title: title,
             content: content,
@@ -54,25 +54,26 @@ class EditNoteForm extends Component {
         .then(data => {
             this.props.editNote(data.data.attributes);
         })
-    }
+    };
 
     render() {
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />
-        }
+        };
         return(
-        <div>
-            
+        <div>  
             <form className="ui form" id="edit-note" onSubmit={this.handleSubmit}>
-            <h1>Edit Your Note:</h1>
-            <p></p>
-            <span > <span style={{cursor:"pointer"}} onClick={this.handleStarred}>{this.state.starred ?
-                <span style={{color: "yellow"}}>{filledStar}</span>
-                :
-                emptyStar
-                }
-                </span>
-                <div style={{padding: "0px", display: "inline"}}>{this.state.starred ? " Unstar this Note:" : " Star this Note:"}</div>
+                <h1>Edit Your Note:</h1>
+                <p></p>
+                <span> 
+                    <span style={{cursor:"pointer"}} onClick={this.handleStarred}>{this.state.starred 
+                    ?
+                    <span style={{color: "yellow"}}>{filledStar}</span>
+                    :
+                    emptyStar
+                    }
+                    </span>
+                    <div style={{padding: "0px", display: "inline"}}>{this.state.starred ? " Unstar this Note:" : " Star this Note:"}</div>
                 </span>
                 <br></br>
                 <br></br>
@@ -88,11 +89,11 @@ class EditNoteForm extends Component {
             </form>
         </div>
         )
-    }
-}
+    };
+};
 
 const mapDispatchToProps = {
     editNote
-}
+};
 
 export default connect(null, mapDispatchToProps)(EditNoteForm)

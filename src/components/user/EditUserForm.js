@@ -1,35 +1,35 @@
-import React, {Component} from 'react'
-import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
-import { editUser, deleteUser } from '../../actions/user'
+import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { editUser, deleteUser } from '../../actions/user';
 
-const API = "https://flatnote-api.herokuapp.com/api/v1/users/"
+const API = "https://flatnote-api.herokuapp.com/api/v1/users/";
 
 class EditUserForm extends Component {
     state = {
         email: this.props.user.email,
         gender: this.props.user.gender,
         image_url: this.props.user.image_url
-    }
+    };
 
     handleChange = event => {
         this.setState({
             [event.target.name]: event.target.value
         })
-    }
+    };
 
     handleSubmit = event => {
         event.preventDefault();
-        const URL = API + this.props.user.id 
-        const token = localStorage.getItem("token")
-        let email = this.state.email === '' ? this.props.user.email : this.state.email 
-        let gender = this.state.gender === '' ? this.props.user.gender : this.state.gender
-        let image_url = this.state.image_url === '' ? this.props.user.image_url : this.state.image_url
+        const URL = API + this.props.user.id; 
+        const token = localStorage.getItem("token");
+        let email = this.state.email === '' ? this.props.user.email : this.state.email; 
+        let gender = this.state.gender === '' ? this.props.user.gender : this.state.gender;
+        let image_url = this.state.image_url === '' ? this.props.user.image_url : this.state.image_url;
         const payload = {
             email: email,
             gender: gender,
             image_url: image_url
-        }
+        };
         this.setState({
             redirect: '/'
         })
@@ -49,8 +49,8 @@ class EditUserForm extends Component {
     }
 
     deleteUser = () => {
-        const URL = API + this.props.user.id 
-        const token = localStorage.getItem("token")
+        const URL = API + this.props.user.id; 
+        const token = localStorage.getItem("token");
         this.setState({
             redirect: "/"
         })
@@ -66,12 +66,12 @@ class EditUserForm extends Component {
         .then(data => {
             this.props.deleteUser()
         })
-    }
+    };
 
     render() {
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />
-        }
+        };
         return(
         <div>
             <form className="ui form" id="edit-user" onSubmit={this.handleSubmit}>
@@ -90,16 +90,15 @@ class EditUserForm extends Component {
                 </div>
                 <button type="submit" className="ui button">Edit My Profile</button>
                 <button className="ui button delete" onClick={this.deleteUser}>Delete This Profile</button>
-            </form>
-            
+            </form>    
         </div>
         )
-    }
-}
+    };
+};
 
 const mapDispatchToProps = {
     editUser,
     deleteUser
-}
+};
 
 export default connect(null, mapDispatchToProps)(EditUserForm)

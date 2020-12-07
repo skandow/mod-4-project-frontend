@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class UserProfile extends Component {
 
-     
     render() {
-        const {username, email, age, gender, image_url } = this.props.user
+        const {username, email, age, gender, image_url } = this.props.user;
         return (
             <div className="user-profile ui card">
                 <div className="image">
@@ -23,11 +22,11 @@ class UserProfile extends Component {
                 </div>                
             </div>
         )
-    }
-}
+    };
+};
 
 const mapStateToProps = state => {
     return { user: state.user }
-}
+};
 
 export default connect(mapStateToProps)(UserProfile)

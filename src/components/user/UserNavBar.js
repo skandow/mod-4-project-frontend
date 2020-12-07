@@ -1,20 +1,20 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux'
-import { deleteUser } from '../../actions/user'
-import { clearNotes } from '../../actions/notes'
+import { connect } from 'react-redux';
+import { deleteUser } from '../../actions/user';
+import { clearNotes } from '../../actions/notes';
 
 const UserNavBar = props => {
   const myStyle = {
     borderBottom: "5px solid gray",
     borderLeft: "5px solid gray",
     borderRight: "5px solid gray"
-  }
+  };
 
   const handleLogOut = () => {
     props.deleteUser();
     props.clearNotes();
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
   }
 
   return (
@@ -31,6 +31,6 @@ const UserNavBar = props => {
 const mapDispatchToProps = {
     deleteUser,
     clearNotes
-}
+};
 
 export default connect(null, mapDispatchToProps)(UserNavBar)

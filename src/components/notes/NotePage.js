@@ -1,22 +1,22 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
-import { editNote, deleteNote } from '../../actions/notes'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { editNote, deleteNote } from '../../actions/notes';
 
-const API = "https://flatnote-api.herokuapp.com/notes/"
-const filledStar ="★"
-const emptyStar="☆"
+const API = "https://flatnote-api.herokuapp.com/notes/";
+const filledStar ="★";
+const emptyStar="☆";
 
 class NotePage extends Component {
     state = {
         redirect: null,
         deleted: false,
         starred: this.props.note.starred
-    }
+    };
 
     deleteNote = () => {
-        const URL = API + this.props.note.id 
-        const token = localStorage.getItem("token")
+        const URL = API + this.props.note.id; 
+        const token = localStorage.getItem("token");
         const reqObj = {
             method: "DELETE",
             headers: {
@@ -32,17 +32,17 @@ class NotePage extends Component {
         .then(data => {
             this.props.deleteNote(this.props.note.id)
         })
-    }
+    };
 
     showEditForm = () => {
         this.setState({
             redirect: `/notes/${this.props.note.id}/edit`
         })
-    }
+    };
 
     star = () => {
-        const URL = API + this.props.note.id
-        const token = localStorage.getItem("token")
+        const URL = API + this.props.note.id;
+        const token = localStorage.getItem("token");
         const payload = {
             starred: !this.props.note.starred
         }
@@ -62,20 +62,21 @@ class NotePage extends Component {
         .then(data => {
             this.props.editNote(data.data.attributes);
         })
-    }
+    };
 
     render() {
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />
-        }
+        };
         if (this.state.deleted) {
             return <Redirect to="/notes" />
-        }
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
-        const date = new Date(this.props.note.created_at).toLocaleDateString("en-US", options)
+        };
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+        const date = new Date(this.props.note.created_at).toLocaleDateString("en-US", options);
         return(
             <div className="notecard">
-                <h2><span style={{cursor:"pointer"}} onClick={this.star}>{this.state.starred ?
+                <h2><span style={{cursor:"pointer"}} onClick={this.star}>{this.state.starred 
+                ?
                 <span style={{color: "yellow"}}>{filledStar}</span>
                 :
                 emptyStar
@@ -87,12 +88,12 @@ class NotePage extends Component {
                 <button className="ui button" onClick={this.deleteNote}>Delete this note</button>
             </div>
         )
-    }
+    };
 }
 
 const mapDispatchToProps = {
     deleteNote,
     editNote
-}
+};
 
 export default connect(null, mapDispatchToProps)(NotePage)

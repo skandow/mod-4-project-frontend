@@ -18,13 +18,13 @@ class SignUp extends Component {
             errorMessage: '',
             redirect: null
         }
-    }
+    };
 
     handleChange = event => {
         this.setState({
             [event.target.name]: event.target.value
         })
-    }
+    };
 
     componentWillUnmount() {
         this.setState({
@@ -35,59 +35,64 @@ class SignUp extends Component {
             gender: '',
             image_url: ''
         })
-    }
+    };
     
     handleSubmit = event => {
-        event.preventDefault()
+        event.preventDefault();
         if ((this.state.username) && (this.state.password) && (this.state.email) && (this.state.gender) && (this.state.image_url)) {
             if (parseInt(this.state.age, 10) > 18) {
-            const payload = { user: {
-            username: this.state.username,
-            password: this.state.password,
-            email: this.state.email,
-            age: parseInt(this.state.age, 10),
-            gender: this.state.gender,
-            image_url: this.state.image_url
-        }}
-        const reqObj = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(payload)
-        }
-        
-        fetch(API, reqObj)
-        .then((resp) => {
-            if(resp.status === 406) {
-                throw Error("Usernames must be unique")
-            } else {
-                this.setState({
-                    redirect: '/'
+                const payload = { 
+                    user: {
+                        username: this.state.username,
+                        password: this.state.password,
+                        email: this.state.email,
+                        age: parseInt(this.state.age, 10),
+                        gender: this.state.gender,
+                        image_url: this.state.image_url
+                    }
+                }
+                const reqObj = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                }
+                fetch(API, reqObj)
+                .then((resp) => {
+                    if(resp.status === 406) {
+                        throw Error("Usernames must be unique")
+                    } else {
+                        this.setState({
+                            redirect: '/'
+                        })
+                    return resp.json()
+                    }
                 })
-                return resp.json()
-            }
-            })
-        .then(data => {
-            localStorage.setItem("token", data.jwt)
-            this.props.addUser(data.user.data.attributes)
-        })
-        .catch(error => {
+                .then(data => {
+                    localStorage.setItem("token", data.jwt)
+                    this.props.addUser(data.user.data.attributes)
+                })
+                .catch(error => {
+                    this.setState({
+                        errorMessage: error.message
+                    })
+                })
+            } else { 
+                this.setState({
+                    errorMessage: "You must be 18 or older to use this site."
+                })}
+        } else {
             this.setState({
-                errorMessage: error.message
+                errorMessage: "No fields can be left blank."
             })
-        })
-    } else this.setState({
-        errorMessage: "You must be 18 or older to use this site."
-    })} else this.setState({
-        errorMessage: "No fields can be left blank."
-    })
+        }
     }
     
     render() {
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />
-        }
+        };
         return (
             <form id="sign-up" className="ui error form" onSubmit={this.handleSubmit}>
                 <h1>Enter Your Information To Create Your Account:</h1>
@@ -126,11 +131,11 @@ class SignUp extends Component {
                 <button type="submit" className="ui button">Submit</button>
             </form>
         )
-    }
-}
+    };
+};
 
 const mapDispatchToProps = {
     addUser
-}
+};
   
 export default connect(null, mapDispatchToProps)(SignUp)

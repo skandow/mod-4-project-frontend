@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
-import { addUser } from '../../actions/user'
-import { loadNotes } from '../../actions/notes'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { addUser } from '../../actions/user';
+import { loadNotes } from '../../actions/notes';
 
 const API = "https://flatnote-api.herokuapp.com/api/v1/login"
 
@@ -15,20 +15,20 @@ class Login extends Component {
             errorMessage: false,
             redirect: null
         }
-    }
+    };
 
     handleChange = event => {
         this.setState({
             [event.target.name]: event.target.value
         })
-    }
+    };
     
     handleSubmit = event => {
-        event.preventDefault()
+        event.preventDefault();
         const payload = {
             username: this.state.username,
             password: this.state.password
-        }
+        };
         this.setState({
             username: '',
             password: ''
@@ -39,8 +39,7 @@ class Login extends Component {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(payload)
-        }
-        
+        };
         fetch(API, reqObj)
         .then((resp) => {
             if(resp.status === 401) {
@@ -62,12 +61,12 @@ class Login extends Component {
                 errorMessage: error.message
             })
         })
-    }
+    };
     
     render() {
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />
-        }
+        };
         return (
             <form onSubmit={this.handleSubmit} className="log-in ui error form">
                 <h1>Please Log In:</h1>
@@ -90,12 +89,12 @@ class Login extends Component {
                 <button type="submit" className="ui button">Log In</button>
             </form>
         )
-    }
-}
+    };
+};
 
 const mapDispatchToProps = {
     addUser,
     loadNotes
-}
+};
   
 export default connect(null, mapDispatchToProps)(Login)
